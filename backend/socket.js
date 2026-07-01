@@ -15,15 +15,15 @@ const isTeamMember = (team, userId) => {
 
 export const initSocket = (httpServer) => {
   const io = new Server(httpServer, {
-    cors: {
-      origin: [
-        'http://localhost:5173',
-        'http://192.168.1.5:5173',
-        /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:5173$/
-      ],
-      credentials: true
-    }
-  });
+  cors: {
+    origin: [
+      'http://localhost:5173',
+      'https://ai-task-manager-ivory.vercel.app'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST']
+  }
+});
 
   // Authenticate every socket connection using the same JWT used for REST calls
   io.use(async (socket, next) => {
