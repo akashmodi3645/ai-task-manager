@@ -26,14 +26,17 @@ const PORT = process.env.PORT || 5000;
 
 // Security middleware
 app.use(helmet());
-app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://192.168.1.5:5173',  // 🔥 Replace with YOUR IP
-    /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:5173$/  // Allow any 192.168.x.x
-  ],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'https://ai-task-manager-ivory.vercel.app'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  })
+);
 
 
 // Rate limiting
